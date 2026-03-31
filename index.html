@@ -803,12 +803,15 @@ R-squared: 0.867</code></pre>
     const getTextToCopy = function(trigger) {
       const outerScaffold = trigger.parentElement.cloneNode(true);
       const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+      if (codeEl) {
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
+        return codeEl.innerText;
       }
-      return codeEl.innerText;
+      return outerScaffold.innerText || '';
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
