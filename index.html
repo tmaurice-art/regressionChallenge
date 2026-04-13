@@ -438,6 +438,331 @@ Figure&nbsp;1: StressSurvey as a proxy for actual Stress levels
 <ol start="9" type="1">
 <li><strong>Avoiding Misleading Statistical Significance.</strong> Reflect on this tip: split the sample into meaningful subsets (“statistical regimes”) and use graphical diagnostics for linearity rather than blind reliance on “canned” regressions. Apply this approach to the multiple regression of Anxiety on both StressSurvey and Time by analyzing a smartly chosen subset of the data. What specific subset did you choose and why? Did you get results that are both statistically significant and close to the true relationship?</li>
 </ol>
+</section>
+</section>
+<section id="solutions-with-outputs" class="level2">
+<h2 class="anchored" data-anchor-id="solutions-with-outputs">Solutions (with outputs)</h2>
+<section id="q1-bivariate-regression-anxiety-on-stresssurvey" class="level3">
+<h3 class="anchored" data-anchor-id="q1-bivariate-regression-anxiety-on-stresssurvey">Q1) Bivariate Regression: Anxiety on StressSurvey</h3>
+<div id="cell-q1-reg" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="op">=</span> ols(observDF[<span class="st">"Anxiety"</span>], observDF[[<span class="st">"StressSurvey"</span>]])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>coef_table(m1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="q1-reg" class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Estimate</th>
+<th data-quarto-table-cell-role="th">SE</th>
+<th data-quarto-table-cell-role="th">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">const</th>
+<td>-1.524</td>
+<td>0.707</td>
+<td>0.050421</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">StressSurvey</th>
+<td>1.047</td>
+<td>0.096</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>Estimated equation:</strong> ( = -1.524 + 1.047 StressSurvey).</p>
+<p><strong>How it compares to truth:</strong> the true model uses <strong>Stress</strong>, not <strong>StressSurvey</strong>, so this coefficient is not a causal “stress effect.” The proxy is monotonic but not on the right linear scale, so the slope is an artifact of that re-scaling.</p>
+</section>
+<section id="q2-visualization-stresssurvey-vs-anxiety" class="level3">
+<h3 class="anchored" data-anchor-id="q2-visualization-stresssurvey-vs-anxiety">Q2) Visualization: StressSurvey vs Anxiety</h3>
+<div id="cell-q2-plot" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>observDF, x<span class="op">=</span><span class="st">"StressSurvey"</span>, y<span class="op">=</span><span class="st">"Anxiety"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            scatter_kws<span class="op">=</span>{<span class="st">"s"</span>: <span class="dv">70</span>, <span class="st">"alpha"</span>: <span class="fl">0.9</span>},</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            line_kws<span class="op">=</span>{<span class="st">"color"</span>: <span class="st">"black"</span>}, ax<span class="op">=</span>ax)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Strong fit ≠ correct causal story (proxy non-linearity)"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="q2-plot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/q2-plot-output-1.png" width="662" height="373" class="figure-img"></p>
+<figcaption>StressSurvey vs Anxiety with OLS line</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Comment:</strong> the fit looks good, but it’s “good for the wrong reason”: the linear line is averaging over different stress regimes produced by a non-linear proxy mapping.</p>
+</section>
+<section id="q3-bivariate-regression-anxiety-on-time" class="level3">
+<h3 class="anchored" data-anchor-id="q3-bivariate-regression-anxiety-on-time">Q3) Bivariate Regression: Anxiety on Time</h3>
+<div id="cell-q3-reg" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m3 <span class="op">=</span> ols(observDF[<span class="st">"Anxiety"</span>], observDF[[<span class="st">"Time"</span>]])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>coef_table(m3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="q3-reg" class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Estimate</th>
+<th data-quarto-table-cell-role="th">SE</th>
+<th data-quarto-table-cell-role="th">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">const</th>
+<td>-3.680</td>
+<td>2.233</td>
+<td>0.123296</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Time</th>
+<td>5.341</td>
+<td>1.305</td>
+<td>0.001270</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>Estimated equation:</strong> ( = -3.680 + 5.341 Time).</p>
+<p><strong>How it compares to truth:</strong> the true causal effect is (+0.1). The bivariate regression is badly biased because it omits Stress, which both drives Anxiety and is correlated with Time in this dataset.</p>
+</section>
+<section id="q4-visualization-time-vs-anxiety" class="level3">
+<h3 class="anchored" data-anchor-id="q4-visualization-time-vs-anxiety">Q4) Visualization: Time vs Anxiety</h3>
+<div id="cell-q4-plot" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sns.regplot(data<span class="op">=</span>observDF, x<span class="op">=</span><span class="st">"Time"</span>, y<span class="op">=</span><span class="st">"Anxiety"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>            scatter_kws<span class="op">=</span>{<span class="st">"s"</span>: <span class="dv">70</span>, <span class="st">"alpha"</span>: <span class="fl">0.9</span>},</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            line_kws<span class="op">=</span>{<span class="st">"color"</span>: <span class="st">"black"</span>}, ax<span class="op">=</span>ax)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Omitted-variable bias makes Time look huge"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="q4-plot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/q4-plot-output-1.png" width="662" height="374" class="figure-img"></p>
+<figcaption>Time vs Anxiety with OLS line</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Comment:</strong> the steep line is mostly Stress showing up “through” Time. The plot makes it easy to see why naïve bivariate models can generate scary but wrong conclusions.</p>
+</section>
+<section id="q5-multiple-regression-stresssurvey-time" class="level3">
+<h3 class="anchored" data-anchor-id="q5-multiple-regression-stresssurvey-time">Q5) Multiple Regression: StressSurvey + Time</h3>
+<div id="cell-q5-reg" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m5 <span class="op">=</span> ols(observDF[<span class="st">"Anxiety"</span>], observDF[[<span class="st">"StressSurvey"</span>, <span class="st">"Time"</span>]])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>coef_table(m5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="q5-reg" class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Estimate</th>
+<th data-quarto-table-cell-role="th">SE</th>
+<th data-quarto-table-cell-role="th">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">const</th>
+<td>0.589</td>
+<td>1.034</td>
+<td>0.579542</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">StressSurvey</th>
+<td>1.427</td>
+<td>0.172</td>
+<td>0.000003</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Time</th>
+<td>-2.780</td>
+<td>1.111</td>
+<td>0.027816</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>Estimated equation:</strong> ( = 0.589 + 1.427 StressSurvey - 2.780 Time).</p>
+<p><strong>How it compares to truth:</strong> this model gets the <em>sign</em> of Time wrong (negative vs true (+0.1)). It looks statistically “clean,” but it’s controlling with a proxy that bends scales differently across regimes.</p>
+</section>
+<section id="q6-multiple-regression-stress-time" class="level3">
+<h3 class="anchored" data-anchor-id="q6-multiple-regression-stress-time">Q6) Multiple Regression: Stress + Time</h3>
+<div id="cell-q6-reg" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m6 <span class="op">=</span> ols(observDF[<span class="st">"Anxiety"</span>], observDF[[<span class="st">"Stress"</span>, <span class="st">"Time"</span>]])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>coef_table(m6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="q6-reg" class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Estimate</th>
+<th data-quarto-table-cell-role="th">SE</th>
+<th data-quarto-table-cell-role="th">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">const</th>
+<td>-0.0</td>
+<td>0.0</td>
+<td>0.190247</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Stress</th>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Time</th>
+<td>0.1</td>
+<td>0.0</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>How it compares to truth:</strong> perfect recovery (intercept (0), Stress (1), Time (0.1)), because Stress is measured on the correct linear scale.</p>
+</section>
+<section id="q7-model-comparison-q5-vs-q6" class="level3">
+<h3 class="anchored" data-anchor-id="q7-model-comparison-q5-vs-q6">Q7) Model Comparison (Q5 vs Q6)</h3>
+<div id="cell-q7-compare" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Model"</span>: [<span class="st">"Q5: StressSurvey + Time"</span>, <span class="st">"Q6: Stress + Time"</span>],</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R^2"</span>: [m5.rsquared, m6.rsquared],</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Time coef"</span>: [m5.params[<span class="st">"Time"</span>], m6.params[<span class="st">"Time"</span>]],</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Time p-value"</span>: [m5.pvalues[<span class="st">"Time"</span>], m6.pvalues[<span class="st">"Time"</span>]],</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stress/Proxy coef"</span>: [m5.params[<span class="st">"StressSurvey"</span>], m6.params[<span class="st">"Stress"</span>]],</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>({<span class="st">"R^2"</span>: <span class="dv">3</span>, <span class="st">"Time coef"</span>: <span class="dv">3</span>, <span class="st">"Time p-value"</span>: <span class="dv">6</span>, <span class="st">"Stress/Proxy coef"</span>: <span class="dv">3</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="q7-compare" class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Model</th>
+<th data-quarto-table-cell-role="th">R^2</th>
+<th data-quarto-table-cell-role="th">Time coef</th>
+<th data-quarto-table-cell-role="th">Time p-value</th>
+<th data-quarto-table-cell-role="th">Stress/Proxy coef</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Q5: StressSurvey + Time</td>
+<td>0.935</td>
+<td>-2.78</td>
+<td>0.027816</td>
+<td>1.427</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Q6: Stress + Time</td>
+<td>1.000</td>
+<td>0.10</td>
+<td>0.000000</td>
+<td>1.000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>Key lesson:</strong> both can look impressive (high (R^2), small p-values), but only Q6 tells the true causal story. Q5 demonstrates how “controlling for the right concept” with the wrong measurement scale can flip signs.</p>
+</section>
+<section id="q8-real-world-implications-press-headlines" class="level3">
+<h3 class="anchored" data-anchor-id="q8-real-world-implications-press-headlines">Q8) Real-World Implications (press headlines)</h3>
+<ul>
+<li><strong>If the press covered Q5:</strong> “Study finds more social media time reduces anxiety.”</li>
+<li><strong>If the press covered Q6:</strong> “Study finds social media time increases anxiety (even after controlling for stress).”</li>
+</ul>
+<p><strong>Who prefers which?</strong></p>
+<ul>
+<li><strong>Typical parent (confirmation bias):</strong> likely to prefer the headline that matches their prior beliefs (many will gravitate to the “social media is harmful” story, i.e., Q6).</li>
+<li><strong>Social media executives:</strong> strongly prefer Q5 (it implies time is harmless or even beneficial).</li>
+</ul>
+</section>
+<section id="q9-avoiding-misleading-significance-split-into-regimes" class="level3">
+<h3 class="anchored" data-anchor-id="q9-avoiding-misleading-significance-split-into-regimes">Q9) Avoiding misleading significance: split into “regimes”</h3>
+<p><strong>Chosen subset:</strong> the low-stress regime <code>StressSurvey &lt;= 6</code> (this corresponds to actual Stress in ({0,1,2})). In this regime the proxy mapping is exactly linear: (Stress = StressSurvey/3). That makes a linear model appropriate <em>within the regime</em>.</p>
+<div id="cell-q9-subset-reg" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> observDF[observDF[<span class="st">"StressSurvey"</span>] <span class="op">&lt;=</span> <span class="dv">6</span>].copy()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>m9 <span class="op">=</span> ols(subset[<span class="st">"Anxiety"</span>], subset[[<span class="st">"StressSurvey"</span>, <span class="st">"Time"</span>]])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>coef_table(m9)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="q9-subset-reg" class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Estimate</th>
+<th data-quarto-table-cell-role="th">SE</th>
+<th data-quarto-table-cell-role="th">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">const</th>
+<td>-0.000</td>
+<td>0.0</td>
+<td>0.451397</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">StressSurvey</th>
+<td>0.333</td>
+<td>0.0</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Time</th>
+<td>0.100</td>
+<td>0.0</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>Result:</strong> both coefficients are statistically significant and the Time coefficient is <strong>exactly</strong> (0.1) (the truth). The StressSurvey coefficient is (0.333), which is also correct once you account for the within-regime scale (Stress = StressSurvey/3).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
