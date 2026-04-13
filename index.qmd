@@ -150,6 +150,144 @@ Are your estimates close? If not, your model is telling a wrong story -- even if
 
 9. **Avoiding Misleading Statistical Significance.** Reflect on this tip: split the sample into meaningful subsets ("statistical regimes") and use graphical diagnostics for linearity rather than blind reliance on "canned" regressions. Apply this approach to the multiple regression of Anxiety on both StressSurvey and Time by analyzing a smartly chosen subset of the data. What specific subset did you choose and why? Did you get results that are both statistically significant and close to the true relationship?
 
+## Solutions (with outputs)
+
+```{python}
+#| label: setup-modeling
+#| echo: false
+import numpy as np
+import statsmodels.api as sm
+
+def ols(y, X):
+    X_ = sm.add_constant(X, has_constant="add")
+    return sm.OLS(y, X_).fit()
+
+def coef_table(model, digits=3):
+    out = (
+        model.summary2()
+        .tables[1]
+        .rename(columns={"Coef.": "Estimate", "Std.Err.": "SE", "P>|t|": "p"})
+        [["Estimate", "SE", "p"]]
+    )
+    return out.round({"Estimate": digits, "SE": digits, "p": 6})
+```
+
+### Q1) Bivariate Regression: Anxiety on StressSurvey
+
+```{python}
+#| label: q1-reg
+m1 = ols(observDF["Anxiety"], observDF[["StressSurvey"]])
+coef_table(m1)
+```
+
+**Estimated equation:** \(\widehat{Anxiety} = -1.524 + 1.047 \cdot StressSurvey\).
+
+**How it compares to truth:** the true model uses **Stress**, not **StressSurvey**, so this coefficient is not a causal “stress effect.” The proxy is monotonic but not on the right linear scale, so the slope is an artifact of that re-scaling.
+
+### Q2) Visualization: StressSurvey vs Anxiety
+
+```{python}
+#| label: q2-plot
+#| fig-cap: "StressSurvey vs Anxiety with OLS line"
+fig, ax = plt.subplots()
+sns.regplot(data=observDF, x="StressSurvey", y="Anxiety",
+            scatter_kws={"s": 70, "alpha": 0.9},
+            line_kws={"color": "black"}, ax=ax)
+ax.set_title("Strong fit ≠ correct causal story (proxy non-linearity)")
+plt.tight_layout()
+plt.show()
+```
+
+**Comment:** the fit looks good, but it’s “good for the wrong reason”: the linear line is averaging over different stress regimes produced by a non-linear proxy mapping.
+
+### Q3) Bivariate Regression: Anxiety on Time
+
+```{python}
+#| label: q3-reg
+m3 = ols(observDF["Anxiety"], observDF[["Time"]])
+coef_table(m3)
+```
+
+**Estimated equation:** \(\widehat{Anxiety} = -3.680 + 5.341 \cdot Time\).
+
+**How it compares to truth:** the true causal effect is \(+0.1\). The bivariate regression is badly biased because it omits Stress, which both drives Anxiety and is correlated with Time in this dataset.
+
+### Q4) Visualization: Time vs Anxiety
+
+```{python}
+#| label: q4-plot
+#| fig-cap: "Time vs Anxiety with OLS line"
+fig, ax = plt.subplots()
+sns.regplot(data=observDF, x="Time", y="Anxiety",
+            scatter_kws={"s": 70, "alpha": 0.9},
+            line_kws={"color": "black"}, ax=ax)
+ax.set_title("Omitted-variable bias makes Time look huge")
+plt.tight_layout()
+plt.show()
+```
+
+**Comment:** the steep line is mostly Stress showing up “through” Time. The plot makes it easy to see why naïve bivariate models can generate scary but wrong conclusions.
+
+### Q5) Multiple Regression: StressSurvey + Time
+
+```{python}
+#| label: q5-reg
+m5 = ols(observDF["Anxiety"], observDF[["StressSurvey", "Time"]])
+coef_table(m5)
+```
+
+**Estimated equation:** \(\widehat{Anxiety} = 0.589 + 1.427 \cdot StressSurvey - 2.780 \cdot Time\).
+
+**How it compares to truth:** this model gets the *sign* of Time wrong (negative vs true \(+0.1\)). It looks statistically “clean,” but it’s controlling with a proxy that bends scales differently across regimes.
+
+### Q6) Multiple Regression: Stress + Time
+
+```{python}
+#| label: q6-reg
+m6 = ols(observDF["Anxiety"], observDF[["Stress", "Time"]])
+coef_table(m6)
+```
+
+**How it compares to truth:** perfect recovery (intercept \(0\), Stress \(1\), Time \(0.1\)), because Stress is measured on the correct linear scale.
+
+### Q7) Model Comparison (Q5 vs Q6)
+
+```{python}
+#| label: q7-compare
+pd.DataFrame({
+    "Model": ["Q5: StressSurvey + Time", "Q6: Stress + Time"],
+    "R^2": [m5.rsquared, m6.rsquared],
+    "Time coef": [m5.params["Time"], m6.params["Time"]],
+    "Time p-value": [m5.pvalues["Time"], m6.pvalues["Time"]],
+    "Stress/Proxy coef": [m5.params["StressSurvey"], m6.params["Stress"]],
+}).round({"R^2": 3, "Time coef": 3, "Time p-value": 6, "Stress/Proxy coef": 3})
+```
+
+**Key lesson:** both can look impressive (high \(R^2\), small p-values), but only Q6 tells the true causal story. Q5 demonstrates how “controlling for the right concept” with the wrong measurement scale can flip signs.
+
+### Q8) Real-World Implications (press headlines)
+
+- **If the press covered Q5:** “Study finds more social media time reduces anxiety.”
+- **If the press covered Q6:** “Study finds social media time increases anxiety (even after controlling for stress).”
+
+**Who prefers which?**
+
+- **Typical parent (confirmation bias):** likely to prefer the headline that matches their prior beliefs (many will gravitate to the “social media is harmful” story, i.e., Q6).
+- **Social media executives:** strongly prefer Q5 (it implies time is harmless or even beneficial).
+
+### Q9) Avoiding misleading significance: split into “regimes”
+
+**Chosen subset:** the low-stress regime `StressSurvey <= 6` (this corresponds to actual Stress in \(\{0,1,2\}\)). In this regime the proxy mapping is exactly linear: \(Stress = StressSurvey/3\). That makes a linear model appropriate *within the regime*.
+
+```{python}
+#| label: q9-subset-reg
+subset = observDF[observDF["StressSurvey"] <= 6].copy()
+m9 = ols(subset["Anxiety"], subset[["StressSurvey", "Time"]])
+coef_table(m9)
+```
+
+**Result:** both coefficients are statistically significant and the Time coefficient is **exactly** \(0.1\) (the truth). The StressSurvey coefficient is \(0.333\), which is also correct once you account for the within-regime scale \(Stress = StressSurvey/3\).
+
 
 
 ::: {.callout-note collapse="true"}
