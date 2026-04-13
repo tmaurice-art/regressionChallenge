@@ -132,121 +132,6 @@ window.Quarto = {
 </header>
 
 
-<section id="regression-challenge---linear-model-interpretability" class="level1">
-<h1>Regression Challenge - Linear Model Interpretability</h1>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>📋 What You Need To Do
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul class="task-list">
-<li><label><input type="checkbox">Fork <a href="https://github.com/flyaflya/regressionChallenge">this repository</a> to create <code>regressionChallenge</code> in your GitHub</label></li>
-<li><label><input type="checkbox">Clone locally and open in Cursor</label></li>
-<li><label><input type="checkbox">Write your analysis in this <code>index.qmd</code></label></li>
-<li><label><input type="checkbox">Render to HTML (<code>quarto render</code> or Render button)</label></li>
-<li><label><input type="checkbox">Push HTML to your repo and enable GitHub Pages</label></li>
-<li><label><input type="checkbox">Share your site: <code>https://[your-username].github.io/regressionChallenge/</code></label></li>
-</ul>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>🐍 Python Environment Setup
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Before rendering, create a fresh virtual environment and install the required packages:</p>
-<ol type="1">
-<li>Press <code>Ctrl+Shift+P</code> to open the Command Palette</li>
-<li>Type <strong>“Python: Select Interpreter”</strong> and select it</li>
-<li>Click <strong>“+ Create Virtual Environment…”</strong></li>
-<li>Choose <strong>Venv</strong></li>
-<li>Select your Python installation (e.g., Python 3.12)</li>
-<li>Wait for the environment to be created and activated</li>
-</ol>
-<p>Then open a terminal and install dependencies:</p>
-<p><strong>Windows:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">py</span> <span class="at">-m</span> pip install jupyter matplotlib pandas seaborn scikit-learn statsmodels</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Mac:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install jupyter matplotlib pandas seaborn scikit-learn statsmodels</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>⚠️ AI Partnership Required
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This challenge pushes boundaries intentionally. You’ll tackle problems that normally require weeks of study, but with Cursor AI as your partner (and your brain keeping it honest), you can accomplish more than you thought possible.</p>
-<p><strong>The new reality:</strong> The four stages of competence are Ignorance → Awareness → Learning → Mastery. AI lets us produce Mastery-level work while operating primarily in the Awareness stage. I focus on awareness training, you leverage AI for execution, and together we create outputs that used to require years of dedicated study.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>📊 Grading Criteria
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Questions 1–5:</strong> Required. Up to <strong>75%</strong> of the grade.</li>
-<li><strong>Questions 6–7:</strong> Up to <strong>85%</strong> of the grade.</li>
-<li><strong>Question 8:</strong> Up to <strong>95%</strong> of the grade.</li>
-<li><strong>Question 9:</strong> Up to <strong>100%</strong> of the grade.</li>
-</ul>
-<p><strong>Your grade depends on narrative clarity and insight, not just correct code.</strong></p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>📝 How to Present Your Analysis
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>This is an investigative report, not a coding exercise.</strong> Present your findings like a professional analyst writing a brief about why we should be skeptical of regression results.</p>
-<ul>
-<li><strong>Q&amp;A Format:</strong> Each question clearly stated, followed by your answer with analysis, visualizations, and interpretations.</li>
-<li><strong>Delete All Instructions:</strong> Remove all challenge instructions, setup guides, and grading criteria from your final rendered HTML. The final report should contain only your Q&amp;A responses.</li>
-<li><strong>Hide Code:</strong> Tell a narrative and visual story using <code>echo: false</code>; the code can be referenced in your GitHub <code>*.qmd</code> source file.</li>
-<li><strong>Plotting Convention:</strong> Put the dependent variable (Anxiety) on the vertical axis. Independent variables (StressSurvey, Stress, Time) go on the horizontal axis.</li>
-<li><strong>Concise and Human:</strong> No AI babble. Tell the story of what you discovered, focus on insights, and write like a data science consultant.</li>
-</ul>
-<p><strong>What we’re looking for:</strong> A compelling 4-8 minute read that demonstrates both the power of linear models for interpretation and the critical pitfalls of over-relying on statistical significance.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>💾 Save Your Work Frequently!
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Commit often using Source Control (Ctrl+Shift+G). Commit after completing each regression analysis, after finishing each question, and before asking AI for help with new code.</p>
-</div>
-</div>
 <section id="the-problem-when-controlling-for-goes-wrong" class="level2">
 <h2 class="anchored" data-anchor-id="the-problem-when-controlling-for-goes-wrong">The Problem: When “Controlling For” Goes Wrong</h2>
 <blockquote class="blockquote">
@@ -311,17 +196,17 @@ Anxiety = Stress + 0.1 \times Time
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The Data</h2>
 <div id="data-generation" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>observDF <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Stress'</span>: [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>],</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'StressSurvey'</span>: [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>],</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Time'</span>: [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">2.1</span>, <span class="fl">2.2</span>, <span class="fl">2.2</span>, <span class="fl">2.2</span>],</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Anxiety'</span>: [<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">1.1</span>, <span class="fl">1.1</span>, <span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">2.2</span>, <span class="fl">2.2</span>, <span class="fl">8.2</span>, <span class="fl">8.2</span>, <span class="fl">8.21</span>, <span class="fl">12.22</span>, <span class="fl">12.22</span>, <span class="fl">12.22</span>]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>observDF <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Stress'</span>: [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>],</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'StressSurvey'</span>: [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Time'</span>: [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">2.1</span>, <span class="fl">2.2</span>, <span class="fl">2.2</span>, <span class="fl">2.2</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Anxiety'</span>: [<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">1.1</span>, <span class="fl">1.1</span>, <span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">2.2</span>, <span class="fl">2.2</span>, <span class="fl">8.2</span>, <span class="fl">8.2</span>, <span class="fl">8.21</span>, <span class="fl">12.22</span>, <span class="fl">12.22</span>, <span class="fl">12.22</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>observDF</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>observDF</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="tbl-observations" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-observations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -477,21 +362,21 @@ Table&nbsp;1: Observed data with known true relationships
 </div>
 </div>
 <div id="cell-fig-stress-proxy" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"whitegrid"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">7</span>, <span class="dv">4</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.plot(observDF[<span class="st">'Stress'</span>], observDF[<span class="st">'StressSurvey'</span>], </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'purple'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"StressSurvey seems a decent (monotonic) proxy for actual Stress"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Actual Stress Level"</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Stress Survey Response"</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"whitegrid"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">7</span>, <span class="dv">4</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>ax.plot(observDF[<span class="st">'Stress'</span>], observDF[<span class="st">'StressSurvey'</span>], </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'purple'</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"StressSurvey seems a decent (monotonic) proxy for actual Stress"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Actual Stress Level"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Stress Survey Response"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="fig-stress-proxy" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -553,139 +438,8 @@ Figure&nbsp;1: StressSurvey as a proxy for actual Stress levels
 <ol start="9" type="1">
 <li><strong>Avoiding Misleading Statistical Significance.</strong> Reflect on this tip: split the sample into meaningful subsets (“statistical regimes”) and use graphical diagnostics for linearity rather than blind reliance on “canned” regressions. Apply this approach to the multiple regression of Anxiety on both StressSurvey and Time by analyzing a smartly chosen subset of the data. What specific subset did you choose and why? Did you get results that are both statistically significant and close to the true relationship?</li>
 </ol>
-</section>
-</section>
-<section id="submission-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="submission-checklist">Submission Checklist ✅</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Forked starter repository from <a href="https://github.com/flyaflya/regressionChallenge">https://github.com/flyaflya/regressionChallenge</a></label></li>
-<li><label><input type="checkbox">Cloned repository locally using Cursor (or VS Code)</label></li>
-<li><label><input type="checkbox">Analysis written in <code>index.qmd</code> with clear Q&amp;A narrative</label></li>
-<li><label><input type="checkbox">Document rendered to HTML successfully</label></li>
-<li><label><input type="checkbox">HTML committed and pushed to your forked repository</label></li>
-<li><label><input type="checkbox">GitHub Pages enabled (Deploy from a branch → main → /(root))</label></li>
-<li><label><input type="checkbox">Site accessible at <code>https://[your-username].github.io/regressionChallenge/</code></label></li>
-</ul>
-</section>
-<section id="sec-regression-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="sec-regression-concepts">Appendix: Regression Concepts Reference</h2>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Click to expand: Simple Linear Regression Example
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div id="cell-simple-regression-python" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(<span class="dv">10</span>, <span class="dv">3</span>, n)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> x <span class="op">+</span> <span class="dv">3</span> <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="dv">2</span>, n)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>model.fit(x.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), y)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coefficient: </span><span class="sc">{</span>model<span class="sc">.</span>coef_[<span class="dv">0</span>]<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Intercept: </span><span class="sc">{</span>model<span class="sc">.</span>intercept_<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared: </span><span class="sc">{</span>r2_score(y, model.predict(x.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)))<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>ax.scatter(x, y, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>ax.plot(x, model.predict(x.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)), color<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Simple Linear Regression'</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X Variable'</span>)</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Y Variable'</span>)</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Coefficient: 1.949
-Intercept: 3.592
-R-squared: 0.915</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div id="simple-regression-python" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/simple-regression-python-output-2.png" width="663" height="374" class="figure-img"></p>
-<figcaption>Simple linear regression example</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Click to expand: Multiple Regression Example
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div id="cell-multiple-regression-python" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">456</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.random.normal(<span class="dv">10</span>, <span class="dv">3</span>, n)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.random.normal(<span class="dv">5</span>, <span class="dv">2</span>, n)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> x1 <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> x2 <span class="op">+</span> <span class="dv">3</span> <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="dv">2</span>, n)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack([x1, x2])</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>model_multi <span class="op">=</span> LinearRegression()</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>model_multi.fit(X, y)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coefficients: </span><span class="sc">{</span>model_multi<span class="sc">.</span>coef_<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Intercept: </span><span class="sc">{</span>model_multi<span class="sc">.</span>intercept_<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R-squared: </span><span class="sc">{</span>r2_score(y, model_multi.predict(X))<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>data_df <span class="op">=</span> pd.DataFrame({<span class="st">'x1'</span>: x1, <span class="st">'x2'</span>: x2, <span class="st">'y'</span>: y})</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>sns.pairplot(data_df)</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Pairs Plot: Multiple Regression Variables'</span>, y<span class="op">=</span><span class="fl">1.02</span>)</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Coefficients: [1.96423174 0.216209  ]
-Intercept: 4.969
-R-squared: 0.867</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div id="multiple-regression-python" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/multiple-regression-python-output-2.png" width="710" height="739" class="figure-img"></p>
-<figcaption>Multiple regression example</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -694,7 +448,7 @@ R-squared: 0.867</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A coefficient is <strong>statistically significant</strong> when its p-value is less than 0.05.</p>
 <ul>
@@ -715,36 +469,6 @@ R-squared: 0.867</code></pre>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Click to expand: Recommended Python Libraries
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Use <code>pandas</code> for data manipulation</li>
-<li>Use <code>matplotlib</code> and <code>seaborn</code> for visualizations</li>
-<li>Use <code>sklearn.linear_model</code> for regression analysis</li>
-<li>Use <code>statsmodels</code> for detailed regression output (p-values, confidence intervals)</li>
-</ul>
-</div>
-</div>
-</div>
-<section id="resources" class="level3">
-<h3 class="anchored" data-anchor-id="resources">Resources</h3>
-<ul>
-<li><strong>Quarto Markdown:</strong> <a href="https://quarto.org/docs/authoring/markdown-basics.html">quarto.org/docs/authoring/markdown-basics.html</a></li>
-<li><strong>Quarto Documentation:</strong> <a href="https://quarto.org/docs">quarto.org/docs</a></li>
-<li><strong>Python Data Science Handbook:</strong> <a href="https://jakevdp.github.io/PythonDataScienceHandbook">jakevdp.github.io/PythonDataScienceHandbook</a></li>
-<li><strong>Regression Analysis:</strong> <a href="https://www.statlearning.com/">An Introduction to Statistical Learning</a></li>
-</ul>
-</section>
 </section>
 </section>
 
@@ -803,15 +527,12 @@ R-squared: 0.867</code></pre>
     const getTextToCopy = function(trigger) {
       const outerScaffold = trigger.parentElement.cloneNode(true);
       const codeEl = outerScaffold.querySelector('code');
-      if (codeEl) {
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
       }
-      return outerScaffold.innerText || '';
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
